@@ -4,5 +4,15 @@ const ingredients = [
   'Garlic',
   'Tomatos',
   'Herbs',
-  'Condiments',
+  'Condiments',  
 ];
+
+ingredients.map((ingredient) => {
+  const ingredientListRef = document.querySelector('#ingredients');
+  const ingredientItemRef = document.createElement('li');
+ 
+  ingredientItemRef.classList.add('item');
+  ingredientItemRef.textContent = ingredient;
+  
+  ingredientListRef.append(ingredientItemRef);
+})
