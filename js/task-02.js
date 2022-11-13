@@ -4,15 +4,18 @@ const ingredients = [
   'Garlic',
   'Tomatos',
   'Herbs',
-  'Condiments',  
+  'Condiments', 
 ];
 
-ingredients.map((ingredient) => {
-  const ingredientListRef = document.querySelector('#ingredients');
-  const ingredientItemRef = document.createElement('li');
+let ingredientListRef = document.querySelector('#ingredients');
+const markupList = [];
  
-  ingredientItemRef.classList.add('item');
+ingredients.map((ingredient) => {
+  let ingredientItemRef = document.createElement('li');
   ingredientItemRef.textContent = ingredient;
+  ingredientItemRef.classList.add('item');
   
-  ingredientListRef.append(ingredientItemRef);
-})
+  markupList.push(ingredientItemRef);  
+});
+
+ingredientListRef.append(...markupList);

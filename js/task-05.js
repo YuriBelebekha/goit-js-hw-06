@@ -5,6 +5,12 @@ const refs = {
 
 refs.nameInput.addEventListener('input', onInputChange);
 
-function onInputChange (event) {   
-  refs.nameOutput.textContent = event.currentTarget.value;
+const defaultSpanText = refs.nameOutput.textContent;
+
+function onInputChange(event) {  
+  if (event.currentTarget.value.trim() !== '') {
+    return refs.nameOutput.textContent = event.currentTarget.value;
+  }
+  
+  refs.nameOutput.textContent = defaultSpanText;
 };
