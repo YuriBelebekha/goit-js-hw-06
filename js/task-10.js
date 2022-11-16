@@ -11,45 +11,38 @@ const refs = {
   boxes: document.querySelector('#boxes'),
 };
 
+refs.inputBoxesAmount.addEventListener('input', getBoxesAmount);
 refs.createBtn.addEventListener('click', createBoxes);
-refs.createBtn.addEventListener('click', getBoxesAmount);
-refs.inputBoxesAmount.addEventListener('blur', getBoxesAmount);
 refs.destroyBtn.addEventListener('click', destroyBoxes);
 
-function createBoxes(amount) {
-  let boxWidth = 20;
-  let boxHeight = 20;
-  const boxes = [];
+let boxWidth = 20;
+let boxHeight = 20;
+let boxMargin = 10; 
 
-  for (let i = 1; i <= amount; i += 1) {  
-    const box = {
-      width:  `${boxWidth += 10}`,
-      height: `${boxHeight += 10}`,
-      margin: '10',
-      backgroundColor: getRandomHexColor(),
-    };
-    boxes.push(box);  
-  };
+function getBoxesAmount(event) {
+  refs.inputBoxesAmount.setAttribute("amount", Number(event.currentTarget.value));  
+};
 
-  const boxesMarkup = boxes
-    .map((box) =>
-      `<div class="box" style="width: ${box.width}px; height: ${box.height}px; 
-      margin: ${box.margin}px; background-color: ${box.backgroundColor};">
-      </div>`
-    )
-    .join('');
-
-  refs.boxes.insertAdjacentHTML("beforeend", boxesMarkup);
+function createBoxes () {
+  let amountBoxes = Number(refs.inputBoxesAmount.getAttribute("amount"));
+  
+  for (let i = 0; i < amountBoxes; i += 1) {
+    boxWidth += 10;
+    boxHeight += 10;    
+    const box = document.createElement("div");          
+    box.style.width = `${boxWidth}px`;
+    box.style.height = `${boxHeight}px`;    
+    box.style.margin = `${boxMargin}px`;
+    box.classList.add("box");
+    box.style.background = getRandomHexColor();    
+    refs.boxes.append(box);
+  }
 
   refs.inputBoxesAmount.value = '';
 };
 
-function getBoxesAmount(event) {
-  event.preventDefault();  
-  createBoxes(event.currentTarget.value);
-};
-
-function destroyBoxes(event) {
-  event.preventDefault();  
-  refs.boxes.textContent = '';  
+function destroyBoxes(event) {  
+  boxWidth = 20;
+  boxHeight = 20;
+  refs.boxes.textContent = '';
 }
