@@ -8,14 +8,13 @@ const ingredients = [
 ];
 
 let ingredientListRef = document.querySelector('#ingredients');
-const markupList = [];
  
-ingredients.map((ingredient) => {
+const markupList = ingredients.map((ingredient) => {
   let ingredientItemRef = document.createElement('li');
   ingredientItemRef.textContent = ingredient;
-  ingredientItemRef.classList.add('item');
-  
-  markupList.push(ingredientItemRef);  
+  ingredientItemRef.classList.add('item');  
+   
+  return ingredientItemRef;
 });
 
 ingredientListRef.append(...markupList);
